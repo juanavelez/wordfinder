@@ -1,0 +1,1 @@
+java -cp "config:lib/*" com.chibchasoft.wordfinder.boot.Boot

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration>
+    <Appenders>
+        <RandomAccessFile name="WordFinderLog" fileName="log/wordfinder.log" immediateFlush="false" append="false">
+            <PatternLayout>
+                <Pattern>%d{HH:mm:ss.SSS} [%t] %-5level - %msg%n</Pattern>
+            </PatternLayout>
+        </RandomAccessFile>
+        <Console name="Console" target="SYSTEM_OUT">
+            <PatternLayout pattern="%d{HH:mm:ss.SSS} [%t] %-5level %c - %msg%n" />
+        </Console>
+    </Appenders>
+    <Loggers>
+        <AsyncRoot level="info">
+            <AppenderRef ref="Console" />
+            <AppenderRef ref="WordFinderLog" />
+        </AsyncRoot>
+    </Loggers>
+</Configuration>
