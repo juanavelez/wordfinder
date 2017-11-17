@@ -43,9 +43,7 @@ public class RestVerticleTest extends VertxTestBase {
 
     @Test
     public void testDefaults() {
-        createConsumer(restVerticle.getBusAddress(), msg -> {
-            msg.reply(new JsonArray());
-        });
+        createConsumer(restVerticle.getBusAddress(), msg -> msg.reply(new JsonArray()));
 
         vertx.deployVerticle(restVerticle, ar -> {
             assertTrue(ar.succeeded());
@@ -67,9 +65,7 @@ public class RestVerticleTest extends VertxTestBase {
     public void testPort8090() {
         restVerticle.setServerPort(8090);
 
-        createConsumer(restVerticle.getBusAddress(), msg -> {
-            msg.reply(new JsonArray());
-        });
+        createConsumer(restVerticle.getBusAddress(), msg -> msg.reply(new JsonArray()));
 
         vertx.deployVerticle(restVerticle, ar -> {
             assertTrue(ar.succeeded());
@@ -91,9 +87,7 @@ public class RestVerticleTest extends VertxTestBase {
     public void testPort80() {
         restVerticle.setServerPort(80);
 
-        createConsumer(restVerticle.getBusAddress(), msg -> {
-            msg.reply(new JsonArray());
-        });
+        createConsumer(restVerticle.getBusAddress(), msg -> msg.reply(new JsonArray()));
 
         vertx.deployVerticle(restVerticle, ar -> {
             assertTrue(ar.failed());
@@ -108,9 +102,7 @@ public class RestVerticleTest extends VertxTestBase {
     public void testHostAllZeros() {
         restVerticle.setServerHost("0.0.0.0");
 
-        createConsumer(restVerticle.getBusAddress(), msg -> {
-            msg.reply(new JsonArray());
-        });
+        createConsumer(restVerticle.getBusAddress(), msg -> msg.reply(new JsonArray()));
 
         vertx.deployVerticle(restVerticle, ar -> {
             assertTrue(ar.succeeded());
@@ -132,9 +124,7 @@ public class RestVerticleTest extends VertxTestBase {
     public void testDifferentBusAddress() {
         restVerticle.setBusAddress("hello");
 
-        createConsumer(restVerticle.getBusAddress(), msg -> {
-            msg.reply(new JsonArray());
-        });
+        createConsumer(restVerticle.getBusAddress(), msg -> msg.reply(new JsonArray()));
 
         vertx.deployVerticle(restVerticle, ar -> {
             assertTrue(ar.succeeded());
@@ -154,9 +144,7 @@ public class RestVerticleTest extends VertxTestBase {
 
     @Test
     public void testNoLettersInPath() {
-        createConsumer(restVerticle.getBusAddress(), msg -> {
-            msg.reply(new JsonArray());
-        });
+        createConsumer(restVerticle.getBusAddress(), msg -> msg.reply(new JsonArray()));
 
         vertx.deployVerticle(restVerticle, ar -> {
             assertTrue(ar.succeeded());
@@ -186,9 +174,7 @@ public class RestVerticleTest extends VertxTestBase {
 
     @Test
     public void testFailedReply() {
-        createConsumer(restVerticle.getBusAddress(), msg -> {
-            msg.fail(100, "test");
-        });
+        createConsumer(restVerticle.getBusAddress(), msg -> msg.fail(100, "test"));
 
         vertx.deployVerticle(restVerticle, ar -> {
             assertTrue(ar.succeeded());

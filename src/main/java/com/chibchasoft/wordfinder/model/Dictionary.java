@@ -14,7 +14,9 @@ package com.chibchasoft.wordfinder.model;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Component;
 
+import javax.annotation.Resource;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
@@ -37,11 +39,12 @@ import static com.chibchasoft.wordfinder.util.Util.validLetter;
  * Words are converted to lowercase before storing them and characters not in the range 'a'-'z' are ignored when
  * searching but the word itself is not modified.
  */
+@Component("dictionary")
 public class Dictionary implements WordFinder {
     private static final Logger LOG = LoggerFactory.getLogger(Dictionary.class);
 
     // the map to store the dictionary words as well as the statistics
-    protected Map<Byte, List<Triplet<String, Byte[], Integer>>> wordsPerLength = new HashMap<>();
+    protected final Map<Byte, List<Triplet<String, Byte[], Integer>>> wordsPerLength = new HashMap<>();
 
     // The points assigned to letter
     protected byte[] letterPoints = new byte[LETTERS_SIZE];
@@ -164,6 +167,7 @@ public class Dictionary implements WordFinder {
      * @param letterPoints an array of bytes with the points for each letter,
      * indexed by the character position in the range 'a'-'z'
      */
+    @Resource(name = "letterPoints")
     public void setLetterPoints(byte[] letterPoints) {
         this.letterPoints = letterPoints;
     }

@@ -41,8 +41,10 @@ public class Boot {
 
     public static void main(String[] args) {
         System.setProperty("vertx.logger-delegate-factory-class-name", "io.vertx.core.logging.SLF4JLogDelegateFactory");
+
         ConfigurableApplicationContext appCtx = new AnnotationConfigApplicationContext(AppConfiguration.class);
         ApplicationContextProvider.setApplicationContext(appCtx);
+
         final Vertx vertx = Vertx.vertx(new VertxOptions());
 
         DependentVerticleDeployer dependentVerticleDeployer = new DependentVerticleDeployer();
@@ -50,7 +52,7 @@ public class Boot {
 
         vertx.deployVerticle(dependentVerticleDeployer, ar -> {
             if (ar.failed()) {
-                LOG.warn("An error occurred while trying to deploy all verticls. " +
+                LOG.warn("An error occurred while trying to deploy all verticles. " +
                          "At this point the application will exit", ar.cause());
                 appCtx.close();
                 System.exit(1);

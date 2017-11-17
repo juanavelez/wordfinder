@@ -12,14 +12,11 @@
  */
 package com.chibchasoft.wordfinder.server.vertx;
 
-import com.chibchasoft.wordfinder.model.Dictionary;
 import com.chibchasoft.wordfinder.model.WordFinder;
 import io.vertx.core.AbstractVerticle;
 import io.vertx.core.Future;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.beans.factory.config.ConfigurableBeanFactory;
 import org.springframework.context.annotation.Scope;
@@ -123,8 +120,7 @@ public class InitVerticle extends AbstractVerticle {
      * Sets the {@link WordFinder}
      * @param wordFinder the WordFinder
      */
-    @Autowired
-    @Qualifier("dictionary")
+    @javax.annotation.Resource(name = "dictionary")
     public void setWordFinder(WordFinder wordFinder) {
         this.wordFinder = wordFinder;
     }

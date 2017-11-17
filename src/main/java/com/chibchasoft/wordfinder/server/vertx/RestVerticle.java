@@ -39,7 +39,7 @@ public class RestVerticle extends AbstractVerticle {
         server = vertx.createHttpServer(serverOptions);
 
         Router router = Router.router(vertx);
-        router.route("/words/:letters" ).handler(this::findWord).produces("application/json");
+        router.route("/words/:letters").handler(this::findWord).produces("application/json");
 
         server.requestHandler(router::accept).listen(ar -> {
             if (ar.failed()) {
@@ -66,9 +66,9 @@ public class RestVerticle extends AbstractVerticle {
     protected void findWord(RoutingContext ctx) {
         HttpServerResponse response = ctx.response();
 
-        String letters = ctx.request().getParam("letters");
+        String letters = ctx.pathParam("letters");
 
-        vertx.eventBus().<JsonArray>send(busAddress, letters, ar-> {
+        vertx.eventBus().<JsonArray>send(busAddress, letters, ar -> {
             if (ar.failed()) {
                 LOG.warn("An error occurred while waiting for the reply to find words", ar.cause());
 

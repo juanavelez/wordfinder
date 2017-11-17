@@ -56,7 +56,7 @@
         <jacoco.exec.data.file>${project.build.directory}/coverage-reports/jacoco.exec</jacoco.exec.data.file>
         <log4j2.version>2.6.2</log4j2.version>
         <slf4j.version>1.7.21</slf4j.version>
-        <spring.version>4.2.5.RELEASE</spring.version>
+        <spring.version>4.3.12.RELEASE</spring.version>
         <vertx.dependent.verticle.deployer.version>1.0.1</vertx.dependent.verticle.deployer.version>
         <vertx.spring.verticle.factory.version>1.0.2</vertx.spring.verticle.factory.version>
         <vertx.web.version>3.5.0</vertx.web.version>

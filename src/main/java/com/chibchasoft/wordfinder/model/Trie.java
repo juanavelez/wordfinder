@@ -15,7 +15,9 @@ package com.chibchasoft.wordfinder.model;
 import com.chibchasoft.wordfinder.util.Util;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Component;
 
+import javax.annotation.Resource;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -30,6 +32,7 @@ import static com.chibchasoft.wordfinder.util.Util.*;
  * characters used in the english language.
  * In addition it keeps track of the "totalPoints" for each node from the root up to this node.
  */
+@Component("trie")
 public class Trie implements WordFinder {
     private static final Logger LOG = LoggerFactory.getLogger(Trie.class);
 
@@ -102,7 +105,7 @@ public class Trie implements WordFinder {
         // We need to sort (descending) the words based on their total points
         words.sort((r1, r2) -> Integer.compare(r2.getSecond(), r1.getSecond()));
 
-        return words.stream().map(r -> r.getFirst()).collect(Collectors.toList());
+        return words.stream().map(Pair::getFirst).collect(Collectors.toList());
     }
 
     /**
@@ -110,7 +113,7 @@ public class Trie implements WordFinder {
      */
     public void reset() {
         root = new Node();
-        letterPoints = new byte[LETTERS_SIZE];;
+        letterPoints = new byte[LETTERS_SIZE];
     }
 
     /**
@@ -127,7 +130,7 @@ public class Trie implements WordFinder {
 
         // The different paths from which the word at this point can take.
         // Each element represents a letter beginning with 'a' at index 0 and finishing with 'z' at index 25
-        protected Node[] children = new Node[LETTERS_SIZE];
+        protected final Node[] children = new Node[LETTERS_SIZE];
 
         public Node() {
             nodeCounter.incrementAndGet();
@@ -214,6 +217,7 @@ public class Trie implements WordFinder {
         return letterPoints;
     }
 
+    @Resource(name = "letterPoints")
     public void setLetterPoints(byte[] letterPoints) {
         this.letterPoints = letterPoints;
     }
@@ -222,7 +226,7 @@ public class Trie implements WordFinder {
      * Keeps track of the quantities for each of the letters
      */
     protected static class LetterIndices {
-        protected byte[] indices = new byte[LETTERS_SIZE];
+        protected final byte[] indices = new byte[LETTERS_SIZE];
         protected int total = 0;
 
         /**

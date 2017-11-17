@@ -13,7 +13,6 @@
 package com.chibchasoft.wordfinder.model;
 
 import com.chibchasoft.wordfinder.util.Util;
-import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;

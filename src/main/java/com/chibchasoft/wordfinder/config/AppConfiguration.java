@@ -12,8 +12,6 @@
  */
 package com.chibchasoft.wordfinder.config;
 
-import com.chibchasoft.wordfinder.model.Dictionary;
-import com.chibchasoft.wordfinder.model.WordFinder;
 import com.chibchasoft.wordfinder.util.Util;
 import io.vertx.core.json.DecodeException;
 import io.vertx.core.json.JsonObject;
@@ -76,17 +74,6 @@ public class AppConfiguration {
     @Bean
     public static PropertySourcesPlaceholderConfigurer propertySourcesPlaceholderConfigurer() {
         return new PropertySourcesPlaceholderConfigurer();
-    }
-
-    /**
-     * Provides the WordFinder implementation. In this case a Dictionary
-     * @return A new Dictionary
-     */
-    @Bean(name="dictionary")
-    public WordFinder dictionary() {
-        Dictionary dict = new Dictionary();
-        dict.setLetterPoints(letterPoints());
-        return dict;
     }
 
     /**

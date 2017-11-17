@@ -12,7 +12,6 @@
  */
 package com.chibchasoft.wordfinder.server.vertx;
 
-import com.chibchasoft.wordfinder.model.Dictionary;
 import com.chibchasoft.wordfinder.model.WordFinder;
 import io.vertx.core.AbstractVerticle;
 import io.vertx.core.Future;
@@ -20,13 +19,12 @@ import io.vertx.core.eventbus.Message;
 import io.vertx.core.json.JsonArray;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.beans.factory.config.ConfigurableBeanFactory;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
+import javax.annotation.Resource;
 import java.util.List;
 
 /**
@@ -76,7 +74,7 @@ public class FindWordsVerticle extends AbstractVerticle {
         LOG.debug("Found " + words);
 
         JsonArray jsonResults = new JsonArray();
-        words.forEach(w -> jsonResults.add(w));
+        words.forEach(jsonResults::add);
 
         msg.reply(jsonResults);
     }
@@ -110,8 +108,7 @@ public class FindWordsVerticle extends AbstractVerticle {
      * Sets the {@link WordFinder}
      * @param wordFinder the WordFinder
      */
-    @Autowired
-    @Qualifier("dictionary")
+    @Resource(name = "dictionary")
     public void setWordFinder(WordFinder wordFinder) {
         this.wordFinder = wordFinder;
     }

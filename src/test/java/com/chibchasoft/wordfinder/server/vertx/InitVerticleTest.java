@@ -12,7 +12,6 @@
  */
 package com.chibchasoft.wordfinder.server.vertx;
 
-import com.chibchasoft.wordfinder.model.Dictionary;
 import com.chibchasoft.wordfinder.model.WordFinder;
 import io.vertx.test.core.VertxTestBase;
 import org.junit.Before;

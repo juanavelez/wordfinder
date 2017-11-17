@@ -122,16 +122,16 @@ public class UtilTest {
     private void assertAllNotNull(Byte[] array, int... index) {
         assertNotNull(array);
 
-        for (int i=0; i<index.length; i++) {
-            assertNotNull(array[index[i]]);
+        for (int i : index) {
+            assertNotNull(array[i]);
         }
     }
 
     private void assertAllNull(Byte[] array, int... index) {
         assertNotNull(array);
 
-        for (int i=0; i<index.length; i++) {
-            assertNull(array[index[i]]);
+        for (int i : index) {
+            assertNull(array[i]);
         }
     }
 

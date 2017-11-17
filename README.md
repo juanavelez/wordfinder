@@ -6,7 +6,7 @@ An application that exposes a REST API to find all the words that can be derived
 
 WordFinder requires:
 
-* Spring Context 4.2.5-Release
+* Spring Context 4.3.12.Release
 * Vert.x Web 3.5.0
 * Vertx Dependent Verticle Deployer 1.0.1
 * Vertx Spring Verticle Factory 1.0.2
