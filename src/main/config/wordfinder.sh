@@ -1,1 +1,1 @@
-java -cp "config:lib/*" com.chibchasoft.wordfinder.boot.Boot
+java --add-opens java.base/java.lang=ALL-UNNAMED -cp "config:lib/*" com.chibchasoft.wordfinder.boot.Boot
