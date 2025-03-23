@@ -55,13 +55,12 @@
         <java.version>1.8</java.version>
 
         <disruptor.version>3.3.4</disruptor.version>
-        <jacoco.exec.data.file>${project.build.directory}/coverage-reports/jacoco.exec</jacoco.exec.data.file>
         <log4j2.version>2.17.1</log4j2.version>
         <slf4j.version>1.7.21</slf4j.version>
-        <spring.version>4.3.12.RELEASE</spring.version>
+        <spring.version>5.3.39</spring.version>
         <vertx.dependent.verticle.deployer.version>1.0.1</vertx.dependent.verticle.deployer.version>
         <vertx.spring.verticle.factory.version>1.0.2</vertx.spring.verticle.factory.version>
-        <vertx.web.version>3.5.0</vertx.web.version>
+        <vertx.web.version>3.9.16</vertx.web.version>
 
         <junit.version>4.13.1</junit.version>
     </properties>
