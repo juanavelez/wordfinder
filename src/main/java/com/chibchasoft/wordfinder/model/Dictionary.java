@@ -25,19 +25,19 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 import static com.chibchasoft.wordfinder.util.Util.LETTERS_SIZE;
-import static com.chibchasoft.wordfinder.util.Util.index;
 import static com.chibchasoft.wordfinder.util.Util.getLettersCount;
+import static com.chibchasoft.wordfinder.util.Util.index;
 import static com.chibchasoft.wordfinder.util.Util.validLetter;
 
 /**
  * An implementation of WordFinder that stores the words in a HashMap. The key is the number of distinct letters
- * in the words and the value is a list of triplets whose first object is the word added, the second objects
- * is an array of Byte objects index by the characters in the word (0-based starting with the 'a' amd ending
+ * in the words and the value is a list of triplets whose first object is the word added, the second object
+ * is an array of Byte objects indexed by the characters in the word (0-based starting with the 'a' and ending
  * with 25 for 'z') and the value of each element in the array is the number of instances of that character
  * in the word and the third object is the score for the word.
- *
+ * <p>
  * Words are converted to lowercase before storing them and characters not in the range 'a'-'z' are ignored when
- * searching but the word itself is not modified.
+ * searching but the word itself is not modified.</p>
  */
 @Component("dictionary")
 public class Dictionary implements WordFinder {
@@ -49,19 +49,19 @@ public class Dictionary implements WordFinder {
     // The points assigned to letter
     protected byte[] letterPoints = new byte[LETTERS_SIZE];
 
+    private int wordCounter = 0;
+    private int wordLength = 0;
+
     public Dictionary() {
 
     }
 
-    int wordCounter = 0;
-    int wordLength = 0;
-
     @Override
     public Dictionary add(String word) {
-        LOG.debug("Adding word[" + word +"]");
+        LOG.debug("Adding word[" + word + "]");
 
         wordCounter++;
-        wordLength+=word.length();
+        wordLength += word.length();
 
         word = word.toLowerCase();
 
@@ -69,23 +69,24 @@ public class Dictionary implements WordFinder {
         Pair<Byte[], Byte> letterCount = getLettersCount(word);
 
         // If the distinct letter count is 0 do nothing
-        if (letterCount.getSecond()==0)
+        if (letterCount.getSecond() == 0)
             return this;
 
         // Get the list of pairs for this number of distinct letters in word parameter.
         List<Triplet<String, Byte[], Integer>> listLetterCount =
-            wordsPerLength.computeIfAbsent(letterCount.getSecond(), k-> new ArrayList<>());
+                wordsPerLength.computeIfAbsent(letterCount.getSecond(), k -> new ArrayList<>());
 
         // Add a new triplet for the word, distinct letter count and score
         listLetterCount.add(new Triplet<>(word, letterCount.getFirst(), calculateScore(word)));
 
-        LOG.debug("Added word[" + word +"]");
+        LOG.debug("Added word[" + word + "]");
 
         return this;
     }
 
     /**
      * Calculates the score for a word using {@link #getLetterPoints()}
+     *
      * @param word the word
      * @return the score
      */
@@ -94,7 +95,7 @@ public class Dictionary implements WordFinder {
             return 0;
 
         byte score = 0;
-        for(char c: word.toCharArray()) {
+        for (char c : word.toCharArray()) {
             if (validLetter(c))
                 score += letterPoints[index(c)];
         }
@@ -104,7 +105,7 @@ public class Dictionary implements WordFinder {
 
     @Override
     public List<String> getWords(String letters) {
-        LOG.debug("Finding all possible words using [" + letters +"]");
+        LOG.debug("Finding all possible words using [" + letters + "]");
 
         // if no letter or empty return an empty list
         if (letters == null || letters.isEmpty())
@@ -118,7 +119,7 @@ public class Dictionary implements WordFinder {
 
         // Iterate up to the number of distinct letters in "letters"
         // Start with 1 because we don't care about 0 words
-        for (byte i=1; i<=letterCount.getSecond(); i++) {
+        for (byte i = 1; i <= letterCount.getSecond(); i++) {
             // Find out if there are words whose number of distinct letters match the number of letters for this iteration
             List<Triplet<String, Byte[], Integer>> listLetterCount = wordsPerLength.get(i);
 
@@ -129,12 +130,12 @@ public class Dictionary implements WordFinder {
             listLetterCount.forEach(triple -> {
                 // For each word iterate over its distinct letters and if the letter exist in the "letters"
                 // and the number of times of that letter is less or equal to the number of times of that letter
-                // which is being compare, then a match is found
+                // to which is being compared, then a match is found
                 boolean ok = true;
 
                 Byte[] lc = triple.getSecond();
 
-                for( int j=0; j<lc.length; j++) {
+                for (int j = 0; j < lc.length; j++) {
                     if (lc[j] != null && (letterCount.getFirst()[j] == null || lc[j] > letterCount.getFirst()[j])) {
                         ok = false;
                         break;
@@ -149,13 +150,14 @@ public class Dictionary implements WordFinder {
         // We need to sort (descending) the words based on their score
         words.sort((r1, r2) -> Integer.compare(r2.getSecond(), r1.getSecond()));
 
-        LOG.debug("Found [" + words.size() + "] words for [" +letters + "]");
+        LOG.debug("Found [" + words.size() + "] words for [" + letters + "]");
 
         return words.stream().map(Pair::getFirst).collect(Collectors.toList());
     }
 
     /**
      * Get the points assigned to letters which will be used to determine the score of a word
+     *
      * @return an array of bytes with the points for each letter, indexed by the character position in the range 'a'-'z'
      */
     public byte[] getLetterPoints() {
@@ -164,8 +166,9 @@ public class Dictionary implements WordFinder {
 
     /**
      * Set the points assigned to letters which will be used to determine the score of a word
+     *
      * @param letterPoints an array of bytes with the points for each letter,
-     * indexed by the character position in the range 'a'-'z'
+     *                     indexed by the character position in the range 'a'-'z'
      */
     @Resource(name = "letterPoints")
     public void setLetterPoints(byte[] letterPoints) {

@@ -35,6 +35,7 @@ public final class Util {
 
     /**
      * Indicates whether the character passed is a valid letter
+     *
      * @param c the character to test
      * @return true if it's a valid letter
      */
@@ -44,6 +45,7 @@ public final class Util {
 
     /**
      * Returns the index (zero-based) for the passed letter in the range of valid letters
+     *
      * @param c the character
      * @return the index
      */
@@ -55,6 +57,7 @@ public final class Util {
      * Returns a pair whose first object is an array of Bytes indexed by the character position in the range 'a'-'z'
      * which is populated if the word has a character for that index and for such index, it counts how many times that
      * character is present in the word. The second object is the number of actual Byte objects is the array.
+     *
      * @param word the word
      * @return the pair
      */

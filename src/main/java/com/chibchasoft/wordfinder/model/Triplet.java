@@ -29,6 +29,7 @@ public class Triplet<T1, T2, T3> extends Pair<T1, T2> {
 
     /**
      * Returns the third object
+     *
      * @return the third object
      */
     public T3 getThird() {

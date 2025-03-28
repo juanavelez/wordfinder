@@ -24,7 +24,10 @@ import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Collectors;
 
-import static com.chibchasoft.wordfinder.util.Util.*;
+import static com.chibchasoft.wordfinder.util.Util.FIRST_LETTER;
+import static com.chibchasoft.wordfinder.util.Util.LETTERS_SIZE;
+import static com.chibchasoft.wordfinder.util.Util.index;
+import static com.chibchasoft.wordfinder.util.Util.validLetter;
 
 /**
  * A <a href="https://en.wikipedia.org/wiki/Trie">Trie</a> used to store dictionary words as well
@@ -54,23 +57,24 @@ public class Trie implements WordFinder {
      */
     @Override
     public Trie add(String word) {
-        LOG.debug("Adding word[" + word +"]");
+        LOG.debug("Adding word[" + word + "]");
 
-        root.add(word.toLowerCase(), letterPoints,0);
+        root.add(word.toLowerCase(), letterPoints, 0);
 
-        LOG.debug("Added word[" + word +"]");
+        LOG.debug("Added word[" + word + "]");
 
         return this;
     }
 
     /**
      * Using the provided letters find all possible words
+     *
      * @param letters the string with the letters to use to find words
      * @return the list of words
      */
     @Override
     public List<String> getWords(String letters) {
-        LOG.debug("Finding all possible words using [" + letters +"]");
+        LOG.debug("Finding all possible words using [" + letters + "]");
 
         if (letters == null || letters.isEmpty())
             return Collections.emptyList();
@@ -100,7 +104,7 @@ public class Trie implements WordFinder {
             }
         }
 
-        LOG.debug("Found [" + words.size() + "] words for [" +letters + "]");
+        LOG.debug("Found [" + words.size() + "] words for [" + letters + "]");
 
         // We need to sort (descending) the words based on their total points
         words.sort((r1, r2) -> Integer.compare(r2.getSecond(), r1.getSecond()));
@@ -139,9 +143,9 @@ public class Trie implements WordFinder {
         /**
          * Add a word to this node
          *
-         * @param word        the word to add
+         * @param word         the word to add
          * @param letterPoints the points for each letter
-         * @param totalPoints the total points so far
+         * @param totalPoints  the total points so far
          */
         public void add(String word, byte[] letterPoints, int totalPoints) {
             if (word == null || word.isEmpty())
@@ -231,6 +235,7 @@ public class Trie implements WordFinder {
 
         /**
          * Calculates the quantity of each letter in the string and stores them in the internal array
+         *
          * @param letters the string with letters
          */
         public void calculateIndices(String letters) {
@@ -246,6 +251,7 @@ public class Trie implements WordFinder {
 
         /**
          * Increases the quantity of the letter at the index
+         *
          * @param index the index
          */
         public void incrementForIndex(int index) {
@@ -263,6 +269,7 @@ public class Trie implements WordFinder {
 
         /**
          * Indicates whether the quantity of the letter at index is greater than 0
+         *
          * @param index the index
          * @return True if quantity of the letter at index is greater than 0
          */
@@ -272,6 +279,7 @@ public class Trie implements WordFinder {
 
         /**
          * Indicates whether all elements have quantity of 0
+         *
          * @return True if all elements have quantity of 0
          */
         public boolean isEmpty() {

@@ -42,13 +42,14 @@ public class AppConfiguration {
 
     /**
      * Provides the points assigned to letters used to determine the score of words
+     *
      * @return an array of bytes with the points for each letter, indexed by the character position in the range 'a'-'z'
      */
-    @Bean(name="letterPoints")
+    @Bean(name = "letterPoints")
     public byte[] letterPoints() {
         byte[] letterPoints = new byte[Util.LETTERS_SIZE];
-        if (letterPointsJson==null) {
-            return letterPoints ;
+        if (letterPointsJson == null) {
+            return letterPoints;
         }
 
         try {
@@ -59,7 +60,7 @@ public class AppConfiguration {
                     letterPoints[c - Util.FIRST_LETTER] = points;
                 }
             }
-        } catch(DecodeException e) {
+        } catch (DecodeException e) {
             String msg = "An error occurred converting to json object[" + letterPointsJson + "]";
             LOG.warn(msg, e);
             throw e;
@@ -78,9 +79,10 @@ public class AppConfiguration {
 
     /**
      * Returns a {@link PropertiesFactoryBean} that points the configuration properties for the application
+     *
      * @return the {@link PropertiesFactoryBean}
      */
-    @Bean(name="applicationProperties")
+    @Bean(name = "applicationProperties")
     public PropertiesFactoryBean applicationProperties() {
         PropertiesFactoryBean bean = new PropertiesFactoryBean();
         bean.setLocation(new ClassPathResource("config.properties"));

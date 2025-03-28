@@ -12,9 +12,12 @@
  */
 package com.chibchasoft.wordfinder.boot;
 
-import java.util.Properties;
-
+import com.chibchasoft.vertx.spring.ApplicationContextProvider;
+import com.chibchasoft.vertx.verticle.deployment.DependentVerticleDeployer;
+import com.chibchasoft.vertx.verticle.deployment.DependentsDeployment;
 import com.chibchasoft.wordfinder.config.AppConfiguration;
+import io.vertx.core.Vertx;
+import io.vertx.core.VertxOptions;
 import io.vertx.core.json.JsonObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -22,12 +25,7 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
-import com.chibchasoft.vertx.spring.ApplicationContextProvider;
-import com.chibchasoft.vertx.verticle.deployment.DependentVerticleDeployer;
-import com.chibchasoft.vertx.verticle.deployment.DependentsDeployment;
-
-import io.vertx.core.Vertx;
-import io.vertx.core.VertxOptions;
+import java.util.Properties;
 
 /**
  * Main entry point for the application. This class creates a new Vertx instance,
@@ -53,7 +51,7 @@ public class Boot {
         vertx.deployVerticle(dependentVerticleDeployer, ar -> {
             if (ar.failed()) {
                 LOG.warn("An error occurred while trying to deploy all verticles. " +
-                         "At this point the application will exit", ar.cause());
+                        "At this point the application will exit", ar.cause());
                 appCtx.close();
                 System.exit(1);
             }
@@ -62,6 +60,7 @@ public class Boot {
 
     /**
      * Returns a DependentsDeployment object obtained from the verticles.configuration property
+     *
      * @param appCtx The ApplicationContext from which to get the application properties
      * @return The DependentsDeployment object
      */
@@ -74,7 +73,7 @@ public class Boot {
         DependentsDeployment dependentsDeployment = new DependentsDeployment();
         try {
             dependentsDeployment.fromJson(new JsonObject(jsonStr));
-        } catch(Throwable t) {
+        } catch (Throwable t) {
             String msg = "Could not decode as JSON=[" + jsonStr + "]";
 
             LOG.error(msg, t);

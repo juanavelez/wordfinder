@@ -61,6 +61,7 @@ public class RestVerticle extends AbstractVerticle {
 
     /**
      * Processes a request to find words using the provided letters
+     *
      * @param ctx the routing context
      */
     protected void findWord(RoutingContext ctx) {
@@ -86,6 +87,7 @@ public class RestVerticle extends AbstractVerticle {
 
     /**
      * Gets the host used for the server. Defaults to localhost
+     *
      * @return the host.
      */
     public String getServerHost() {
@@ -94,6 +96,7 @@ public class RestVerticle extends AbstractVerticle {
 
     /**
      * Sets the host used for the server. Defaults to localhost
+     *
      * @param serverHost the host.
      */
     @Value("${rest.server.host:localhost}")
@@ -103,6 +106,7 @@ public class RestVerticle extends AbstractVerticle {
 
     /**
      * Gets the port used for the server. Defaults to 8080.
+     *
      * @return the port.
      */
     public int getServerPort() {
@@ -111,6 +115,7 @@ public class RestVerticle extends AbstractVerticle {
 
     /**
      * Sets the port used for the server.the port used for the server. Defaults to 8080
+     *
      * @param serverPort the port.
      */
     @Value("${rest.server.port:8080}")
@@ -120,6 +125,7 @@ public class RestVerticle extends AbstractVerticle {
 
     /**
      * Gets the event bus address where requests to find the words is sent. Defaults to findWords
+     *
      * @return the event bus address.
      */
     public String getBusAddress() {
@@ -128,6 +134,7 @@ public class RestVerticle extends AbstractVerticle {
 
     /**
      * Sets the event bus address where requests to find the words is sent.
+     *
      * @param busAddress the event bus address
      */
     @Value("${vertx.findwords.address:findWords}")

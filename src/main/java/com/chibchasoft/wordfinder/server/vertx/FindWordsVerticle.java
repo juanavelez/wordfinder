@@ -63,6 +63,7 @@ public class FindWordsVerticle extends AbstractVerticle {
     /**
      * Replies to the messages with all the possible words that can be created using the
      * letter provided in the message
+     *
      * @param msg The message which includes the letters
      */
     public void findWords(Message<String> msg) {
@@ -81,6 +82,7 @@ public class FindWordsVerticle extends AbstractVerticle {
 
     /**
      * Gets the event bus address to listen for requests to find words. Defaults to findWords
+     *
      * @return the event bus address.
      */
     public String getBusAddress() {
@@ -89,6 +91,7 @@ public class FindWordsVerticle extends AbstractVerticle {
 
     /**
      * Sets the event bus address to listen for requests to find words
+     *
      * @param busAddress the event bus address
      */
     @Value("${vertx.findwords.address:findWords}")
@@ -98,6 +101,7 @@ public class FindWordsVerticle extends AbstractVerticle {
 
     /**
      * Gets the {@link WordFinder}
+     *
      * @return the Wordfinder
      */
     public WordFinder getWordFinder() {
@@ -106,6 +110,7 @@ public class FindWordsVerticle extends AbstractVerticle {
 
     /**
      * Sets the {@link WordFinder}
+     *
      * @param wordFinder the WordFinder
      */
     @Resource(name = "dictionary")

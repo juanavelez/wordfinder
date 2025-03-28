@@ -10,8 +10,9 @@ public interface WordFinder {
      * Adds a word to the list of words used to search. The word is added using the lowercase for its characters.
      * Implementations may choose to ignore/discard characters not in the 'a'-z' range when storing the word.
      * In any case, when finding words these characters will be ignored.
+     *
      * @param word The word to add.
-     * @return a reference to this, so the it can be used fluently
+     * @return a reference to this, so it can be used fluently
      */
     WordFinder add(String word);
 
@@ -19,6 +20,7 @@ public interface WordFinder {
      * Returns the list of words that match all possible combinations of the letters.
      * The letters are converted to lowercase before the search is executed. The search also ignores
      * any characters not in the 'a'-'z' range.
+     *
      * @param letters The letters
      * @return the list of words ordered in descending mode by their score
      */

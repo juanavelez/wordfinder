@@ -61,10 +61,11 @@ public class InitVerticle extends AbstractVerticle {
 
     /**
      * Load the words into the Trie
+     *
      * @param future the future to fail or complete
      */
     private void loadWords(Future<Void> future) {
-        if (wordsLocation == null || ! wordsLocation.exists() ) {
+        if (wordsLocation == null || !wordsLocation.exists()) {
             future.fail("wordsLocation[" + wordsLocation + "] does not exist");
             return;
         }
@@ -93,6 +94,7 @@ public class InitVerticle extends AbstractVerticle {
 
     /**
      * Get the location where to find the words to load
+     *
      * @return the location where to find the words to load
      */
     public Resource getWordsLocation() {
@@ -101,6 +103,7 @@ public class InitVerticle extends AbstractVerticle {
 
     /**
      * Sets the location where to find the words to load
+     *
      * @param wordsLocation the location where to find the words to load
      */
     @Value("${words.location:classpath:english-words.txt}")
@@ -110,6 +113,7 @@ public class InitVerticle extends AbstractVerticle {
 
     /**
      * Gets the {@link WordFinder}
+     *
      * @return the Wordfinder
      */
     public WordFinder getWordFinder() {
@@ -118,6 +122,7 @@ public class InitVerticle extends AbstractVerticle {
 
     /**
      * Sets the {@link WordFinder}
+     *
      * @param wordFinder the WordFinder
      */
     @javax.annotation.Resource(name = "dictionary")

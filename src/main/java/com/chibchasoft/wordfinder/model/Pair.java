@@ -29,6 +29,7 @@ public class Pair<T1, T2> {
 
     /**
      * Returns the first object
+     *
      * @return the first object
      */
     public T1 getFirst() {
@@ -37,6 +38,7 @@ public class Pair<T1, T2> {
 
     /**
      * Returns the second object
+     *
      * @return the second object
      */
     public T2 getSecond() {
